@@ -8,8 +8,8 @@ class Klayers():
     def layer_version(self, scope, package, layer_version="latest"):
         lambda_layer_version = aws_lambda.LayerVersion.from_layer_version_arn(
             scope,
-            id=f"{self.region}-{self.python_version}-{package}-{layer_version}",
-            layer_version_arn=f"arn:aws:lambda:{self.region}:770693421928:layer:Klayers-p312-{package}:3"
+            id=f"ap-southeast-1-{self.python_version}-{package}-{layer_version}",
+            layer_version_arn=f"arn:aws:lambda:ap-southeast-1:770693421928:layer:Klayers-p312-requests:3"
         )
 
         return lambda_layer_version
