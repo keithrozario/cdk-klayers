@@ -1,8 +1,8 @@
 class KlayersError(Exception):
-
     """
     Base class for exceptions in this module.
     """
+
     pass
 
 
@@ -15,13 +15,16 @@ class NoRegionProvidedError(KlayersError):
         self.message = message
         self.Code = "NoRegionProvidedError"
 
+
 class LayerVersionNotInteger(KlayersError):
     """
     Layer Version Provided cannot be converted to integer
     """
+
     def __init__(self, message):
         self.message = message
         self.Code = "LayerVersionNotInteger"
+
 
 class LayerNameDoesNotExists(KlayersError):
     """
@@ -31,6 +34,7 @@ class LayerNameDoesNotExists(KlayersError):
     def __init__(self, message):
         self.message = message
         self.Code = "LayerNameDoesNotExists"
+
 
 class InvalidPythonVersion(KlayersError):
     """

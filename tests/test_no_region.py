@@ -6,15 +6,13 @@ from cdk_klayers import Klayers
 from cdk_klayers.exceptions import InvalidPythonVersion, KlayersError
 import pytest
 
+
 class MockStack(Stack):
 
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
-        klayers = Klayers(
-            self,
-            python_version = aws_lambda.Runtime.PYTHON_3_12
-        )
+        klayers = Klayers(self, python_version=aws_lambda.Runtime.PYTHON_3_12)
 
 
 def test_create_no_region():

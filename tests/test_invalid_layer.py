@@ -6,15 +6,14 @@ from cdk_klayers import Klayers
 from cdk_klayers.exceptions import LayerNameDoesNotExists, KlayersError
 import pytest
 
+
 class MockStack(Stack):
 
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
         klayers = Klayers(
-            self,
-            python_version = aws_lambda.Runtime.PYTHON_3_12,
-            region = "ap-southeast-1"
+            self, python_version=aws_lambda.Runtime.PYTHON_3_12, region="ap-southeast-1"
         )
         bad_layer = klayers.layer_version(self, "bad-layer")
 

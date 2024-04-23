@@ -19,16 +19,13 @@ class MockStack(Stack):
         super().__init__(scope, construct_id, **kwargs)
 
         global global_runtime
-        self.klayers = Klayers(
-            self,
-            python_version = global_runtime
-        )
-    
+        self.klayers = Klayers(self, python_version=global_runtime)
+
     def layer_version(self, package, layer_version="latest"):
         return self.klayers.layer_version(self, package, layer_version)
 
 
-def mock_stack_create(region:str, package:str, runtime:aws_lambda.Runtime):
+def mock_stack_create(region: str, package: str, runtime: aws_lambda.Runtime):
 
     app = App()
     env = Environment(region=region)
@@ -40,7 +37,7 @@ def mock_stack_create(region:str, package:str, runtime:aws_lambda.Runtime):
 
     mock_stack = MockStack(app, "MyTestingStack", env=env)
     assert isinstance(mock_stack, Stack)
-    
+
     test_layer = mock_stack.layer_version(package, "latest")
     assert isinstance(test_layer, jsii._reference_map.InterfaceDynamicProxy)
 
@@ -49,28 +46,31 @@ def mock_stack_create(region:str, package:str, runtime:aws_lambda.Runtime):
     assert validate_layer_arn(layer_arn)
 
     layer_name = layer_arn.split(":")[6]
-    prefix,python_version,*layer_package = layer_name.split("-")
+    prefix, python_version, *layer_package = layer_name.split("-")
     # Python packages can also have dashes(-) in the name
-    layer_package_name = '-'.join(layer_package)
-    
+    layer_package_name = "-".join(layer_package)
+
     assert prefix == "Klayers"
-    assert python_version == runtime.to_string().replace("python", "p").replace(".","")
-    assert layer_package_name == package 
+    assert python_version == runtime.to_string().replace("python", "p").replace(".", "")
+    assert layer_package_name == package
 
     layer_region = layer_arn.split(":")[3]
-    assert layer_region == region 
-    
+    assert layer_region == region
+
+    layer_version = layer_arn.split(":")[7]
+    assert layer_version == "3"
 
 
 # custom class to be the mock return value
 # will override the requests.Response returned from requests.get
 class MockResponse:
     # mock content() method always returns a specific testing dictionary
-    content="""
+    content = """
             [{"packageVersion": "0.6.23", 
             "arn": "arn:aws:lambda:ap-southeast-1:770693421928:layer:Klayers-p312-requests:3",
             "package": "requests"}]
             """
+
 
 def test_monkey_patch(monkeypatch):
     # Any arguments may be passed and mock_get() will always return our
@@ -84,5 +84,5 @@ def test_monkey_patch(monkeypatch):
     mock_stack_create(
         region="ap-southeast-1",
         package="requests",
-        runtime=aws_lambda.Runtime.PYTHON_3_12
+        runtime=aws_lambda.Runtime.PYTHON_3_12,
     )
