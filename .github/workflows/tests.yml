@@ -17,6 +17,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
       with:
@@ -43,6 +44,4 @@ jobs:
 
     - name: Testing with Pytest
       working-directory: ./tests
-      run: |
-        source $VENV
-        poetry run pytest .
+      run: poetry run pytest .
