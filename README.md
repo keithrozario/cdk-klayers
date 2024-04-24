@@ -24,10 +24,12 @@ class MockStack(Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
+        runtime = aws_lambda.Runtime.PYTHON_3_12
+
         # Initialize Klayers 
         klayers = Klayers(
             self,
-            python_version = aws_lambda.Runtime.PYTHON_3_12
+            python_version = runtime
         )
     
         # get the latest layer version for the requests package
@@ -36,7 +38,7 @@ class MockStack(Stack):
 
         lambda_function = aws_lambda.Function(
             self, 'HelloHandler',
-            runtime= aws_lambda.Runtime.PYTHON_3_12,
+            runtime=runtime,
             layers=[requests_layer, idna_layer],
             code=aws_lambda.Code.from_asset('lambda'),
             handler='hello.handler'
@@ -44,9 +46,7 @@ class MockStack(Stack):
         )
 
 
-
 app = App()
-# region must be specified in environment or within the Klayers __init__
 env = Environment(region="us-east-1")
 mock_stack =MockStack(app, "test", env=env)
 ```
