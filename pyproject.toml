@@ -9,11 +9,13 @@ readme = "README.md"
 python = "^3.8"
 aws-cdk-lib = "^2.137.0"
 requests = "^2.31.0"
+bandit = {extras = ["baseline"], version = "^1.7.8"}
 
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.1.1"
 black = "^24.4.0"
+bandit = {extras = ["baseline"], version = "^1.7.8"}
 
 [build-system]
 requires = ["poetry-core"]
