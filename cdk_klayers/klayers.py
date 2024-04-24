@@ -88,11 +88,11 @@ class Klayers:
         try:
             latest_layers = requests.get(
                 f"{self.base_url}/{url_python_version}/layers/latest/{region}/",
-                timeout=3
+                timeout=3,
             )
         except requests.exceptions.RequestException as req_err:
             raise exceptions.RequestException(
-                message = f"Unable to call API at {self.base_url}. This could be DNS, HTTP or Timeout issue. Error type: {type(req_err).__name__}"
+                message=f"Unable to call API at {self.base_url}. This could be DNS, HTTP or Timeout issue. Error type: {type(req_err).__name__}"
             )
 
         # Api returns a list, convert to dict
