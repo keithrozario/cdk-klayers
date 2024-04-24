@@ -3,7 +3,7 @@ from aws_cdk import App, Stack
 from constructs import Construct
 
 from cdk_klayers import Klayers
-from cdk_klayers.exceptions import InvalidPythonVersion, KlayersError
+from cdk_klayers.exceptions import NoRegionProvidedError, KlayersError
 import pytest
 
 
@@ -20,4 +20,4 @@ def test_create_no_region():
     with pytest.raises(KlayersError) as e:
         mock_stack = MockStack(app, "MyTestingStack")
 
-    assert isinstance(e.value, InvalidPythonVersion)
+    assert isinstance(e.value, NoRegionProvidedError)
