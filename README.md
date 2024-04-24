@@ -42,7 +42,6 @@ class MockStack(Stack):
             layers=[requests_layer, idna_layer],
             code=aws_lambda.Code.from_asset('lambda'),
             handler='hello.handler'
-            # other props
         )
 
 

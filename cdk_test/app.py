@@ -6,7 +6,7 @@ from pathlib import Path
 from cdk_test.cdk_test_stack import CdkTestStack
 
 from aws_cdk import aws_lambda
-from aws_cdk import App,Stack,Environment
+from aws_cdk import App, Stack, Environment
 from aws_cdk import Aws
 from constructs import Construct
 
@@ -25,9 +25,7 @@ class MockStack(Stack):
             layer_version_arn=f"arn:aws:lambda:{Aws.REGION}:017000801446:layer:AWSLambdaPowertoolsPythonV2:69",
         )
 
-        klayers = Klayers(
-            self, python_version=aws_lambda.Runtime.PYTHON_3_12
-        )
+        klayers = Klayers(self, python_version=aws_lambda.Runtime.PYTHON_3_12)
 
         idna_layer = klayers.layer_version(self, "requests")
         requests_layer = klayers.layer_version(self, "idna")
@@ -44,5 +42,5 @@ class MockStack(Stack):
 
 app = App()
 env = Environment(region="ap-southeast-1")
-mock_stack = MockStack(app, "test",env = env)
+mock_stack = MockStack(app, "test", env=env)
 app.synth()

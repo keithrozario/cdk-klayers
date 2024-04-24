@@ -34,7 +34,6 @@ class MockStack(Stack):
             handler="hello.handler",
             layers=[self.requests_layer_version_3],
         )
-        lambda_string = lambda_function.to_string()
 
 
 app = App()
