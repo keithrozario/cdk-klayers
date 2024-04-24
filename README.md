@@ -2,7 +2,10 @@
 
 Python package for using [Klayers](https://github.com/keithrozario/Klayers) within your CDK Stacks.
 
- [![Python 3.12](https://img.shields.io/badge/python-3.12-green?style=for-the-badge)](https://www.python.org/downloads/release/python-3120/)  [![Code style: black](https://img.shields.io/badge/code%20style-black-000000?style=for-the-badge)](https://github.com/psf/black)
+
+[![Python 3.10](https://img.shields.io/badge/python-3.10-green?style=for-the-badge)]
+[![Python 3.11](https://img.shields.io/badge/python-3.11-green?style=for-the-badge)]
+[![Python 3.12](https://img.shields.io/badge/python-3.12-green?style=for-the-badge)](https://www.python.org/downloads/release/python-3120/)  [![Code style: black](https://img.shields.io/badge/code%20style-black-000000?style=for-the-badge)](https://github.com/psf/black)
 
 ## Install
 
@@ -52,4 +55,4 @@ mock_stack =MockStack(app, "test", env=env)
 
 ## Other Notes
 
-We're still in beta. Currently we've only tested in Python 3.12, but will extend support for python 3.11, and python 3.10 soon as well.
+We're still in beta, this might change. Please raise an issue if you have any feedback.
