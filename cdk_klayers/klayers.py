@@ -85,9 +85,15 @@ class Klayers:
         """
 
         url_python_version = python_version.to_string().replace("python", "p")
-        latest_layers = requests.get(
-            f"{self.base_url}/{url_python_version}/layers/latest/{region}/"
-        )
+        try:
+            latest_layers = requests.get(
+                f"{self.base_url}/{url_python_version}/layers/latest/{region}/",
+                timeout=3
+            )
+        except requests.exceptions.RequestException as req_err:
+            raise exceptions.RequestException(
+                message = f"Unable to call API at {self.base_url}. This could be DNS, HTTP or Timeout issue. Error type: {type(req_err).__name__}"
+            )
 
         # Api returns a list, convert to dict
         layers = json.loads(latest_layers.content)
@@ -108,7 +114,7 @@ class Klayers:
             python_version_str = python_version.to_string()
         else:
             raise exceptions.InvalidPythonVersion(
-                message=f"python_version must be of type aws_lambda.Runtime, e.g. aws_lambda.Runtime.PYTHON_3_12. Got {python_version} instead"
+                message=f"python_version must be of type aws_lambda.Runtime, e.g. aws_lambda.Runtime.PYTHON_3_12. Got {type(python_version)} instead"
             )
 
         return python_version_str

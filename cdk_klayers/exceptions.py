@@ -14,6 +14,7 @@ class NoRegionProvidedError(KlayersError):
     def __init__(self, message):
         self.message = message
         self.Code = "NoRegionProvidedError"
+        super().__init__(self.message)
 
 
 class LayerVersionNotInteger(KlayersError):
@@ -24,6 +25,7 @@ class LayerVersionNotInteger(KlayersError):
     def __init__(self, message):
         self.message = message
         self.Code = "LayerVersionNotInteger"
+        super().__init__(self.message)
 
 
 class LayerNameDoesNotExists(KlayersError):
@@ -34,6 +36,7 @@ class LayerNameDoesNotExists(KlayersError):
     def __init__(self, message):
         self.message = message
         self.Code = "LayerNameDoesNotExists"
+        super().__init__(self.message)
 
 
 class InvalidPythonVersion(KlayersError):
@@ -44,3 +47,14 @@ class InvalidPythonVersion(KlayersError):
     def __init__(self, message):
         self.message = message
         self.Code = "InvalidPythonVersion"
+        super().__init__(self.message)
+
+class RequestException(KlayersError):
+    """
+    Unable to connect to the API
+    """
+
+    def __init__(self, message):
+        self.message = message
+        self.Code = "RequestException"
+        super().__init__(self.message)
