@@ -40,7 +40,8 @@ class MockStack(Stack):
             runtime=runtime,
             layers=[requests_layer],
             code=aws_lambda.Code.from_asset('lambda'),
-            hand
+            handler='hello.handler'
+        )
 
 ```
 
